@@ -13,12 +13,10 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 allprojects {
-    group = "com.yanolja.fnb"
+    group = "com.fnb.review"
     version = "0.0.1-SNAPSHOT"
 
     repositories {
-//        maven("https://plugins.gradle.org/m2/")
-//        maven("https://jitpack.io")
         mavenCentral()
         google()
     }
@@ -52,21 +50,21 @@ subprojects {
 
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-        implementation("io.github.microutils:kotlin-logging:2.1.23")
+        implementation("io.github.microutils:kotlin-logging:${Versions.kotlin_logging}")
 
         runtimeOnly("com.h2database:h2")
         runtimeOnly("mysql:mysql-connector-java")
 
-        testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-        testImplementation("org.testcontainers:testcontainers:1.17.3")
-        testImplementation("org.testcontainers:junit-jupiter:1.17.3")
+        testImplementation("org.junit.jupiter:junit-jupiter:${Versions.junit_jupiter}")
+        testImplementation("org.testcontainers:testcontainers:${Versions.testcontainers}")
+        testImplementation("org.testcontainers:junit-jupiter:${Versions.testcontainers_junit_jupiter}")
 
-        testImplementation(platform("io.kotest:kotest-bom:5.4.2"))
+        testImplementation(platform("io.kotest:kotest-bom:${Versions.kotest_bom}"))
         testImplementation("io.kotest:kotest-runner-junit5")
 
-        testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+        testImplementation("io.kotest.extensions:kotest-extensions-spring:${Versions.kotest_extensions_spring}")
 
-        testImplementation("io.mockk:mockk:1.12.5")
+        testImplementation("io.mockk:mockk:${Versions.mock}")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.security:spring-security-test")
@@ -107,7 +105,6 @@ subprojects {
 project(":fnb-review-domain-core") {
     val jar: Jar by tasks
     val bootJar: BootJar by tasks
-
     bootJar.enabled = false
     jar.enabled = true
 }
