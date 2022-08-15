@@ -17,7 +17,10 @@ allprojects {
     version = "0.0.1-SNAPSHOT"
 
     repositories {
+//        maven("https://plugins.gradle.org/m2/")
+//        maven("https://jitpack.io")
         mavenCentral()
+        google()
     }
 }
 
@@ -44,12 +47,26 @@ subprojects {
         implementation("com.querydsl:querydsl-jpa:${Versions.querydsl_version}")
         kapt("com.querydsl:querydsl-apt:${Versions.querydsl_version}:jpa")
         kapt("org.springframework.boot:spring-boot-configuration-processor")
+        kapt("jakarta.persistence:jakarta.persistence-api")
+        kapt("jakarta.annotation:jakarta.annotation-api")
 
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("io.github.microutils:kotlin-logging:2.1.23")
 
         runtimeOnly("com.h2database:h2")
         runtimeOnly("mysql:mysql-connector-java")
+
+        testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+        testImplementation("org.testcontainers:testcontainers:1.17.3")
+        testImplementation("org.testcontainers:junit-jupiter:1.17.3")
+
+        testImplementation(platform("io.kotest:kotest-bom:5.4.2"))
+        testImplementation("io.kotest:kotest-runner-junit5")
+
+        testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+
+        testImplementation("io.mockk:mockk:1.12.5")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.springframework.security:spring-security-test")
@@ -73,7 +90,11 @@ subprojects {
     }
 
     tasks.withType<Test> {
+        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
         useJUnitPlatform()
+        testLogging {
+//            events = setOf(FAILED, PASSED, SKIPPED)
+        }
     }
 
     configurations {
