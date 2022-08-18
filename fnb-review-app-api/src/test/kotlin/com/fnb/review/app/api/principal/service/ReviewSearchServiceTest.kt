@@ -9,8 +9,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import mu.KotlinLogging
 
-import org.junit.jupiter.api.Assertions.*
-
 internal class ReviewSearchServiceTest: StringSpec() {
     private val log = KotlinLogging.logger { }
 

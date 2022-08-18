@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service
 class ReviewQueryService(
     val reviewRepository: ReviewRepository
 ) {
-    fun findById(@NotNull id: Long): ReviewEntity =
-        checkNotNull(reviewRepository.findByIdOrNull(id)) { "${id}에 해당하는 리뷰정보가 없습니다." }
+    fun findByRestaurantIdAndReviewId(@NotNull restaurantId: Long, @NotNull reviewId: Long): ReviewEntity =
+        reviewRepository.findByRestaurantIdAndReviewId(restaurantId, reviewId).orElseThrow()
+
+    fun findByRestaurantId(@NotNull restaurantId: Long): MutableList<ReviewEntity> =
+        reviewRepository.findByRestaurantId(restaurantId)
+
 }

@@ -37,7 +37,7 @@ subprojects {
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-security")
+//        implementation("org.springframework.boot:spring-boot-starter-security")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -67,7 +67,7 @@ subprojects {
         testImplementation("io.mockk:mockk:${Versions.mock}")
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("org.springframework.security:spring-security-test")
+//        testImplementation("org.springframework.security:spring-security-test")
     }
 
     dependencyManagement {
